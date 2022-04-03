@@ -1,0 +1,12 @@
+---
+- name: install git tree
+  hosts: app
+  tasks:
+    - name: install git tree
+      apt:
+        name:
+          - tree
+          - maven
+          - git
+        state: present
+

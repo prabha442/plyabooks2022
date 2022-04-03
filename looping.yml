@@ -1,0 +1,15 @@
+---
+- name: install multiple s/w using loops
+  hosts: app
+  tasks:
+    - name: install git java maven tree 
+      apt:
+        name: "{{item}}"
+        state: present
+        update_cache: no
+      with_items:
+        - tree
+        - git
+        - openjdk-8-jdk
+        - maven
+        - firewalld

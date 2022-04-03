@@ -1,0 +1,30 @@
+---
+- name: install and configuring tomcat9
+  hosts: app
+  tasks:
+    - name: install tomcat9
+      apt:
+        name: tomcat9
+        state: present
+
+    - name: install tomcat9-admin
+      apt:
+         name: tomcat9-admin
+         state: present
+
+    - name: change port
+      replace:
+        regexp: 8080
+        replace: 9090
+        path: /etc/tomcat9/server.xml
+
+    - name: restart tomcat9
+      service:
+        name: tomcat9
+        state: restarted
+
+    - name: check url
+      uri:
+        url: http://35.154.44.139:9090
+        status_code: 200
+

@@ -1,0 +1,24 @@
+---
+- name: create files and folders
+  hosts: app
+  tasks:
+    - name: create file1 on folder /tmp
+      file:
+        name: /home/ubuntu/git/file111
+
+        state: touch
+        owner: tom
+        group: git
+        mode: 0777
+
+
+    - name: create directory
+      file:
+        name: /home/ubuntu/git/dir111
+        state: directory
+        owner: tom
+        group: git
+        mode: 0777
+
+       
+

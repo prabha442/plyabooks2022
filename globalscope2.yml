@@ -1,0 +1,16 @@
+
+---
+- name: creating users and files and directory in user home directory
+  hosts: app
+  tasks:
+    - name: create user
+      user:
+        name: "{{a}}"
+        password: "{{b}}"
+        home: "{{c}}"
+
+    - name: create files and directorys on user home directory
+      file:
+        name: "{{d}}"
+        state: "{{e}}"
+        mode: "{{f}}"

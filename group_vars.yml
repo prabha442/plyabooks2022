@@ -1,0 +1,29 @@
+---
+- name: host scope variable ( group_vars...)
+  hosts: app
+  tasks:
+    - name: create user using group_vars
+      user:
+        name: "{{a}}"
+        password: "{{b}}"
+        uid: "{{c}}"
+        home: "{{d}}"
+
+    - name: install apache2
+      apt:
+        name: "{{e}}"
+        state: "{{f}}"
+
+    - name: copy the cntent on index.html
+      copy:
+        content: "{{g}}"
+        dest: "{{h}}"
+
+    - name: restatrt the apache2
+      service:
+        name: "{{e}}"
+        state: "{{i}}"
+
+
+
+

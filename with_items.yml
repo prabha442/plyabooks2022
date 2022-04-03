@@ -1,0 +1,13 @@
+--- 
+- name: create user and files and dir
+  hosts: app
+  tasks:
+    - name: create user
+      user:
+        name: "{{item}}"
+        password: pass123
+      with_items:
+        - ravi
+        - nari
+        - pravn
+        - chinna

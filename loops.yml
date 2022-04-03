@@ -1,0 +1,27 @@
+---
+- name: install s/w's
+  hosts: app
+  tasks:
+    - name: install tree
+      apt:
+        name: tree
+        state: present
+        update_cache: no
+
+   - name: install git
+     apt: 
+       name: git
+       state: present
+       update_cache: no
+
+   - name: install java
+     apt:
+       name: openjdk-8-jdk
+       state: present
+       update_cache: no
+
+   - name: install firewalld
+     apt:
+       name: firewalld
+       state: present
+       update_cache: no

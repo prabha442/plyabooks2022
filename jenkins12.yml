@@ -1,0 +1,46 @@
+---
+- name: install s/w for ci-cd 
+  hosts: servers
+  tasks:
+    - name: install s/w's
+      apt:
+        name: "{{item}}"
+        state: present
+        update_cache: no
+
+      with_items:
+        - openjdk-8-jdk
+        - git
+        - maven
+        - tomcat9
+        - tomcat9-admin
+
+- name: download the code from git hub into dev server
+  hosts: dev
+  tasks:
+    - name: clone code from github
+      git:
+        repo: https://github.com/prabha442/maven-web-application.git
+        dest: /home/ubuntu/github
+
+    - name: continuos build using maven
+      shell: cd /home/ubuntu/github;mvn clean install
+    - name: copy the artifacts into controller from devserver
+      fetch:
+        src: /home/ubuntu/github/target/maven-web-application.war
+        dest: /home/ubuntu/artifacts
+- name: deploy code into qa server and run the test progress
+  hosts: qa
+  tasks:
+    - name: copy artifacts into tomcat qa server
+      copy:
+        src: /home/ubuntu/artifacts/172.31.44.10/home/ubuntu/github/target/maven-web-application.war
+        dest: /var/lib/tomcat9/webapps/
+
+- name: deploy artifacts into prod server
+  hosts: prod
+  tasks:
+    - name: deploy artifacts into prod
+      copy:
+        src: /home/ubuntu/artifacts/172.31.44.10/home/ubuntu/github/target/maven-web-application.war
+        dest: /var/lib/tomcat9/webapps/prabha.war

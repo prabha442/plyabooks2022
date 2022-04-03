@@ -1,0 +1,22 @@
+---
+- name: error handling
+  hosts: web
+
+  tasks:
+    - block:
+        - name: install tomcat7
+          apt:
+            name: tomcat7
+            state: present
+      rescue:
+        - name: install tomcat9
+          apt:
+            name: tomcat9
+            state: present
+
+      always:
+        - name: restart
+          service:
+             name: tomcat9
+             state: restarted
+

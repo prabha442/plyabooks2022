@@ -1,0 +1,26 @@
+---
+- name: install apache2 and configure 
+  hosts: app
+  tasks:
+    - name: install apache2
+      apt:
+        name: apache2
+        state: present
+        update_cache: no
+
+
+    - name: change content on index.html
+      copy:
+        src: /home/ubuntu/index.html
+        dest: /var/www/html/index.html
+
+    - name: restart the apache2
+      service:
+         name: apache2
+         state: restarted
+
+    - name: check url
+      uri:
+        url: http://13.232.88.167:80
+        status_code: 200
+

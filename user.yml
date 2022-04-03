@@ -1,0 +1,24 @@
+--- 
+- name: creating users and permissions
+  hosts: app
+  tasks:
+    - name: creating user tom
+      user:
+        name: tom
+        password: tom123
+        uid: 2222
+        home: /home/ubuntu/tom
+        shell: /bin/bash
+        comment: normal user for practice
+        state: present
+
+    - name: creating user git
+      user:
+        name: git
+        password: git123
+        uid: 3333
+        home: /home/ubuntu/git
+        shell: /bin/bash
+        comment: this is also normal user
+        state: present
+

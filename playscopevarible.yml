@@ -1,0 +1,19 @@
+---
+- name: this is an playscope varibles
+  hosts: app
+  vars:
+    - a: tomcat9
+    - b: present
+    - c: no
+    - d: started
+  tasks:
+    - name: install tomcat9
+      apt:
+        name: "{{a}}"
+        state: "{{b}}"
+        update_cache: "{{c}}"
+
+    - name: start tomcat9
+      service:
+        name: "{{a}}"
+        state: "{{d}}" 
